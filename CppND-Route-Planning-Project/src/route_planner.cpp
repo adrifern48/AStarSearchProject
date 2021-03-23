@@ -19,6 +19,7 @@ float RoutePlanner::CalculateHValue(RouteModel::Node const *node) {
     if (node != nullptr && end_node != nullptr) {
         return this->end_node->distance(*node);
     }
+    return 0.f;
 }
 
 
@@ -43,8 +44,8 @@ RouteModel::Node *RoutePlanner::NextNode() {
 
         // sorted in descending order
         sort(open_list.begin(), open_list.end(), [](const RouteModel::Node* a, const RouteModel::Node* b) {
-            float f1 = a->h_value + a->g_value;
-            float f2 = b->h_value + b->g_value;
+            const float f1 = a->h_value + a->g_value;
+            const float f2 = b->h_value + b->g_value;
             return f1 > f2;
         });
 
